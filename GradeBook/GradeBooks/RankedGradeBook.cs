@@ -24,15 +24,15 @@ namespace GradeBook.GradeBooks
             List<double> averages = Students.Select(s => s.AverageGrade).ToList();
             averages.Sort();
 
-            int numberOfStudentsGradeA_ShouldPass = numberOfStudents - (int)(numberOfStudents * 0.2);
-            int numberOfStudentsGradeB_ShouldPass = numberOfStudents - (int)(numberOfStudents * 0.4);
-            int numberOfStudentsGradeC_ShouldPass = numberOfStudents - (int)(numberOfStudents * 0.6);
-            int numberOfStudentsGradeD_ShouldPass = numberOfStudents - (int)(numberOfStudents * 0.8);
+            int numberOfStudentsGradeA_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.2);
+            int numberOfStudentsGradeB_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.4);
+            int numberOfStudentsGradeC_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.6);
+            int numberOfStudentsGradeD_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.8);
 
-            double gradeA_threshold = averages[numberOfStudentsGradeA_ShouldPass];
-            double gradeB_threshold = averages[numberOfStudentsGradeB_ShouldPass];
-            double gradeC_threshold = averages[numberOfStudentsGradeC_ShouldPass];
-            double gradeD_threshold = averages[numberOfStudentsGradeD_ShouldPass];
+            double gradeA_threshold = averages[numberOfStudentsGradeA_shouldPass];
+            double gradeB_threshold = averages[numberOfStudentsGradeB_shouldPass];
+            double gradeC_threshold = averages[numberOfStudentsGradeC_shouldPass];
+            double gradeD_threshold = averages[numberOfStudentsGradeD_shouldPass];
 
             if(averageGrade >= gradeA_threshold) return 'A';
             if(averageGrade >= gradeB_threshold) return 'B';
