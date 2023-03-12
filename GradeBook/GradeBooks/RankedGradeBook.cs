@@ -14,17 +14,15 @@ namespace GradeBook.GradeBooks
 
         public override char GetLetterGrade(double averageGrade)
         {
-            int numberOfStudents = Students.Count;
-
-            if (numberOfStudents < 5) throw new InvalidOperationException();
+            if (Students.Count < 5) throw new InvalidOperationException();
 
             List<double> averages = Students.Select(s => s.AverageGrade).ToList();
             averages.Sort();
 
-            int numberOfStudentsGradeA_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.2);
-            int numberOfStudentsGradeB_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.4);
-            int numberOfStudentsGradeC_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.6);
-            int numberOfStudentsGradeD_shouldPass = numberOfStudents - (int)(numberOfStudents * 0.8);
+            int numberOfStudentsGradeA_shouldPass = Students.Count - (int)(Students.Count * 0.2);
+            int numberOfStudentsGradeB_shouldPass = Students.Count - (int)(Students.Count * 0.4);
+            int numberOfStudentsGradeC_shouldPass = Students.Count - (int)(Students.Count * 0.6);
+            int numberOfStudentsGradeD_shouldPass = Students.Count - (int)(Students.Count * 0.8);
 
             double gradeA_threshold = averages[numberOfStudentsGradeA_shouldPass];
             double gradeB_threshold = averages[numberOfStudentsGradeB_shouldPass];
@@ -39,5 +37,24 @@ namespace GradeBook.GradeBooks
             return 'F';
         }
 
+        public override void CalculateStatistics()
+        {
+            if (Students.Count < 5){
+                Console.WriteLine("Ranked grading requires at least 5 students with grades in order to properly calculate a student's overall grade.");
+                return;
+            }
+
+            base.CalculateStatistics();
+        }
+
+        public override void CalculateStudentStatistics(string name)
+        {
+            if (Students.Count < 5){
+                Console.WriteLine("Ranked grading requires at least 5 students with grades in order to properly calculate a student's overall grade.");
+                return;
+            }
+            
+            base.CalculateStudentStatistics(name);
+        }
     }
 }
