@@ -34,10 +34,10 @@ namespace GradeBook.GradeBooks
             double gradeC_threshold = averages[numberOfStudentsGradeC_ShouldPass];
             double gradeD_threshold = averages[numberOfStudentsGradeD_ShouldPass];
 
-            if(averageGrade > gradeA_threshold) return 'A';
-            if(averageGrade > gradeB_threshold) return 'B';
-            if(averageGrade > gradeC_threshold) return 'C';
-            if(averageGrade > gradeD_threshold) return 'D';
+            if(averageGrade >= gradeA_threshold) return 'A';
+            if(averageGrade >= gradeB_threshold) return 'B';
+            if(averageGrade >= gradeC_threshold) return 'C';
+            if(averageGrade >= gradeD_threshold) return 'D';
 
             return 'F';
         }
