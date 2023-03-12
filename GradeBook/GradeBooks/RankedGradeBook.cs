@@ -16,10 +16,7 @@ namespace GradeBook.GradeBooks
         {
             int numberOfStudents = Students.Count;
 
-            if (numberOfStudents < 5)
-            {
-                throw new InvalidOperationException();
-            }
+            if (numberOfStudents < 5) throw new InvalidOperationException();
 
             List<double> averages = Students.Select(s => s.AverageGrade).ToList();
             averages.Sort();
