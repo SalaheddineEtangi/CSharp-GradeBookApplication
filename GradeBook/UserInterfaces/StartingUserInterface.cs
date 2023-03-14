@@ -1,5 +1,5 @@
 ﻿using GradeBook.GradeBooks;
-using System;
+using static System.Console;
 
 namespace GradeBook.UserInterfaces
 {
@@ -10,9 +10,9 @@ namespace GradeBook.UserInterfaces
         {
             while (!Quit)
             {
-                Console.WriteLine(string.Empty);
-                Console.WriteLine(">> What would you like to do?");
-                var command = Console.ReadLine().ToLower();
+                WriteLine(string.Empty);
+                WriteLine(">> What would you like to do?");
+                var command = ReadLine().ToLower();
                 CommandRoute(command);
             }
         }
@@ -28,21 +28,36 @@ namespace GradeBook.UserInterfaces
             else if (command == "quit")
                 Quit = true;
             else
-                Console.WriteLine("{0} was not recognized, please try again.", command);
+                WriteLine("{0} was not recognized, please try again.", command);
         }
 
         public static void CreateCommand(string command)
         {
             var parts = command.Split(' ');
-            if (parts.Length != 2)
+            if (parts.Length != 3)
             {
-                Console.WriteLine("Command not valid, Create requires a name.");
+                WriteLine("Command not valid, Create requires a name and type of gradebook.");
                 return;
             }
             var name = parts[1];
-            BaseGradeBook gradeBook = new BaseGradeBook(name);
-            Console.WriteLine("Created gradebook {0}.", name);
-            GradeBookUserInterface.CommandLoop(gradeBook);
+            var type = parts[2];
+
+            if(type != "standard" && type != "ranked"){
+                WriteLine("{0} is not a supported type of gradebook, please try again", type);
+                return;
+            }
+
+            if(type == "standard"){
+                StandardGradeBook standardGradeBook = new StandardGradeBook(name);
+                WriteLine("Created standard gradebook {0}.", name);
+                GradeBookUserInterface.CommandLoop(standardGradeBook);
+            }
+
+            if(type == "ranked"){
+                RankedGradeBook rankedGradeBook = new RankedGradeBook(name);
+                WriteLine("Created ranked gradebook {0}.", name);
+                GradeBookUserInterface.CommandLoop(rankedGradeBook);
+            }
         }
 
         public static void LoadCommand(string command)
@@ -50,7 +65,7 @@ namespace GradeBook.UserInterfaces
             var parts = command.Split(' ');
             if (parts.Length != 2)
             {
-                Console.WriteLine("Command not valid, Load requires a name.");
+                WriteLine("Command not valid, Load requires a name.");
                 return;
             }
             var name = parts[1];
@@ -64,16 +79,16 @@ namespace GradeBook.UserInterfaces
 
         public static void HelpCommand()
         {
-            Console.WriteLine();
-            Console.WriteLine("GradeBook accepts the following commands:");
-            Console.WriteLine();
-            Console.WriteLine("Create 'Name' - Creates a new gradebook where 'Name' is the name of the gradebook.");
-            Console.WriteLine();
-            Console.WriteLine("Load 'Name' - Loads the gradebook with the provided 'Name'.");
-            Console.WriteLine();
-            Console.WriteLine("Help - Displays all accepted commands.");
-            Console.WriteLine();
-            Console.WriteLine("Quit - Exits the application");
+            WriteLine();
+            WriteLine("GradeBook accepts the following commands:");
+            WriteLine();
+            WriteLine("Create 'Name' 'Type' - Creates a new gradebook where 'Name' is the name of the gradebook and 'Type' is what type of grading it should use.");
+            WriteLine();
+            WriteLine("Load 'Name' - Loads the gradebook with the provided 'Name'.");
+            WriteLine();
+            WriteLine("Help - Displays all accepted commands.");
+            WriteLine();
+            WriteLine("Quit - Exits the application");
         }
     }
 }

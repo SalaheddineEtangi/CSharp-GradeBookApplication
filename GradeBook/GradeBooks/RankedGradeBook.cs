@@ -14,7 +14,8 @@ namespace GradeBook.GradeBooks
 
         public override char GetLetterGrade(double averageGrade)
         {
-            if (Students.Count < 5) throw new InvalidOperationException();
+            if (Students.Count < 5) 
+                throw new InvalidOperationException();
 
             List<double> averages = Students.Select(s => s.AverageGrade).ToList();
             averages.Sort();
@@ -29,10 +30,14 @@ namespace GradeBook.GradeBooks
             double gradeC_threshold = averages[numberOfStudentsGradeC_shouldPass];
             double gradeD_threshold = averages[numberOfStudentsGradeD_shouldPass];
 
-            if(averageGrade >= gradeA_threshold) return 'A';
-            if(averageGrade >= gradeB_threshold) return 'B';
-            if(averageGrade >= gradeC_threshold) return 'C';
-            if(averageGrade >= gradeD_threshold) return 'D';
+            if(averageGrade >= gradeA_threshold) 
+                return 'A';
+            if(averageGrade >= gradeB_threshold) 
+                return 'B';
+            if(averageGrade >= gradeC_threshold) 
+                return 'C';
+            if(averageGrade >= gradeD_threshold) 
+                return 'D';
 
             return 'F';
         }
